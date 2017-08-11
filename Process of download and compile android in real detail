@@ -1,0 +1,150 @@
+Process of download and compile android in real detail
+
+1. Checking and Establishing a Build Environment
+Firstly, Open Setting -> System Settings, make sure your Build Environment is up to the following requirements.
+
+
+
+1.1 Installing required packages
+
+Copy and paste following command:
+
+sudo apt-get install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev libc6-dev lib32ncurses5-dev x11proto-core-dev libx11-dev lib32readline-gplv2-dev lib32z1-dev libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown libxml2-utils xsltproc
+
+note: it maybe require you to enter password for the first time, if so, please enter it.
+
+
+then copy and paste following command:
+sudo apt-get install openjdk-7-jdk
+
+
+1.2. Configure git with your real name and email address
+Copy and paste one by one, replace the "Your Name" and “you@example.com” with your own name and email:
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+
+2. Now, we will begin to download android source code.
+
+2.1 Create a new directory named msm8909_1.2.3-10210 in your work directory:
+
+mkdir msm8909_1.2.3-10210
+
+2.2 then copy repo (use the repo I attached in previous email) to msm8909_1.2.3-10210
+
+
+2.3 copy and paste this command
+./repo init -u git://codeaurora.org/platform/manifest.git -b release -m LA.BR.1.2.3-10210-8x09.0.xml --repo-url=git://codeaurora.org/tools/repo.git --repo-branch=caf-stable
+
+
+Waiting it to fininsh.
+
+
+Enter “ls –la “,  you will find a hidden directory named .repo
+
+
+
+2.4 then enter this command
+repo sync
+
+
+Normally, the download process will begin. Because the whole size of android source code is about 50G,
+So it will take you about several hours, depending on your network enviroment, to download.
+
+Please wait wait ….. 
+
+After it finished，enter “ls”to check the directorys. 
+
+
+Now we finish the first step.
+
+
+3. Merge SC20CEQAR01A07_SDK.tar.gz to msm8909_1.2.3-10210
+I suppose you have this SC20CEQAR01A07_SDK.tar.gz. if not, please contact our FAE to get it, or you can download it from https://mega.nz/#!m04mFAaZ!xONDB8E5xEx7le-mNVAAcv_uOwaQ3-D3hG7lJucRID8
+
+3.1 Create SC20CEQAR01A07_SDK under work directory.
+mkdir SC20CEQAR01A07_SDK
+
+
+
+3.2 Copy SC20CEQAR01A07_SDK.tar.gz to work directory.
+
+
+
+3.3 Extract SC20CEQAR01A07_SDK.tar.gz under SC20CEQAR01A07_SDK.
+tar -xvf SC20CEQAR01A07_SDK.tar.gz
+
+
+It will look like this:
+
+
+Then delete SC20CEQAR01A07_SDK.tar.gz
+rm -rf SC20CEQAR01A07_SDK.tar.gz
+
+now only some directorys remained.
+
+
+
+3.4 Back to msm8909_1.2.3-10210 and copy and paste following command.
+
+cp -rf  ../SC20CEQAR01A07_SDK/* .
+
+
+Now we have merged SC20CEQAR01A07_SDK.tar.gz and msm8909_1.2.3-10210 together.
+
+
+3.5 more …
+
+Pls to enter  “ls vendor/qcom/” under msm8909_1.2.3-10210, you should find proprietary here. If you can not see it , maybe something wrong with previous steps ..
+
+
+
+4. Begain to compile !
+4.1 make sure you under msm8909_1.2.3-10210.
+
+
+4.2 Copy and paste following command
+
+source build/envsetup.sh
+
+
+
+
+4.3 lunch a target
+
+Enter “lunch”
+
+
+Enter msm8909-userdebug , then it should be like this.
+
+
+4.4 make your target
+
+If you are running Ubuntu in a virtual machine, pls enter :
+
+make -j2
+
+-j2 means you use two cpu threads to compile the android source code.
+
+If not , you can use make –j4 or more.
+
+Then it will begin to build, please wait about serveral hours again …
+
+
+If you machine is powerful, it will only take one or two hours to finish.
+
+
+4.5 Last steps
+After finishing compile, can you see “out” under msm8909_1.2.3-10210 ?
+
+
+
+
+
+Execute this to check the result:
+
+ls out/target/product/msm8909/
+
+Some import images are listed below.
+
+
+If all of this images are generated, Congratulations !
