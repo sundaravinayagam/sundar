@@ -1,0 +1,15 @@
+IOCTL's:
+
+https://stackoverflow.com/questions/15807846/ioctl-linux-device-driver
+
+Interrupt:
+
+https://notes.shichao.io/lkd/ch7/
+
+Spin lock:
+
+https://www.osronline.com/showthread.cfm?link=161882
+
+https://msdn.microsoft.com/en-us/library/windows/hardware/Dn613957(v=vs.85).aspx
+
+https://attractivechaos.wordpress.com/2011/10/06/multi-threaded-programming-efficiency-of-locking/
